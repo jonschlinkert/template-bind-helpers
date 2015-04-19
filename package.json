@@ -1,7 +1,7 @@
 {
   "name": "template-bind-helpers",
   "description": "Utility for applications based on Template for exposing the current instance of the application as `this` in helpers.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/template-bind-helpers",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,8 +29,12 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "engine-lodash": "^0.6.2",
+    "lodash": "^3.7.0",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "template": "^0.12.6",
+    "template-helpers": "^0.3.2"
   },
   "keywords": [
     "assemble",
