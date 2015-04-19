@@ -9,7 +9,7 @@ npm i template-bind-helpers --save
 ```
 
 ## Usage
-### [.exports](./index.js#L32)
+### [bindHelpers](index.js#L32)
 
 Bind helper functions to `app` so that, when the helper is called, the `this` keyword is set to the provided instance of `app`.
 
@@ -30,13 +30,13 @@ app.render(str, opts, function(err, result) {
 ```
 
 ## Related projects
-* [helper-cache](https://github.com/jonschlinkert/helper-cache): Easily register and get helper functions to be passed to any template engine or node.js application. Methods for both sync and async helpers.
-* [engine-cache](https://github.com/jonschlinkert/engine-cache): express.js inspired template-engine manager.
-* [async-helpers](https://github.com/doowb/async-helpers): Use async helpers in template engines like Handlebars and Lodash.
-* [template-helpers](https://github.com/jonschlinkert/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or any engine that supports helper functions.  
+ * [helper-cache](https://github.com/jonschlinkert/helper-cache): Easily register and get helper functions to be passed to any template engine or node.js application. Methods for both sync and async helpers.
+ * [engine-cache](https://github.com/jonschlinkert/engine-cache): express.js inspired template-engine manager.
+ * [async-helpers](https://github.com/doowb/async-helpers): Use async helpers in template engines like Handlebars and Lodash.
+ * [template-helpers](https://github.com/jonschlinkert/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or any engine that supports helper functions.  
 
 ## Running tests
-Install dev dependencies.
+Install dev dependencies:
 
 ```bash
 npm i -d && npm test
@@ -48,7 +48,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 ## Author
 
 **Jon Schlinkert**
- 
+
 + [github/jonschlinkert](https://github.com/jonschlinkert)
 + [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
 
