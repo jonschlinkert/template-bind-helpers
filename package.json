@@ -1,7 +1,7 @@
 {
   "name": "template-bind-helpers",
   "description": "Utility for applications based on Template for exposing the current instance of the application as `this` in helpers.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jonschlinkert/template-bind-helpers",
   "author": {
     "name": "Jon Schlinkert",
