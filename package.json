@@ -1,0 +1,45 @@
+{
+  "name": "template-bind-helpers",
+  "description": "Utility for applications based on Template for exposing the current instance of the application as `this` in helpers.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/template-bind-helpers",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/template-bind-helpers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/template-bind-helpers/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/jonschlinkert/template-bind-helpers/blob/master/LICENSE"
+  },
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "assemble",
+    "engines",
+    "generate",
+    "helper",
+    "helpers",
+    "template",
+    "templates",
+    "verb"
+  ]
+}
