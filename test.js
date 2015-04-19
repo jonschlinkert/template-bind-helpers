@@ -8,19 +8,59 @@
 'use strict';
 
 /* deps:mocha */
-var assert = require('assert');
 var should = require('should');
-var templateBindHelpers = require('./');
+var bindHelpers = require('./');
+var Template = require('template');
+var helpers = require('template-helpers');
+var _ = require('lodash');
+var template;
 
-describe('templateBindHelpers', function () {
-  it('should:', function () {
-    templateBindHelpers('a').should.eql({a: 'b'});
-    templateBindHelpers('a').should.equal('a');
+function render(str, context) {
+  try {
+    var opts = {imports: context.imports};
+    return _.template(str, opts)(context);
+  } catch(err) {
+    return err;
+  }
+}
+
+describe('bindHelpers', function () {
+  beforeEach(function () {
+    template = new Template();
+    template.engine('*', require('engine-lodash'));
+    template.helpers(helpers._);
   });
 
-  it('should throw an error:', function () {
+  // make sure Template is working directly
+  it('should render a template with a helper:', function () {
+    template.render('I am: <%= name %>', {name: 'Jon'}).should.equal('I am: Jon');
+    template.render('I am: <%= replace(name, "J", "Y") %>', {name: 'Jon'}).should.equal('I am: Yon');
+  });
+
+  // make sure our mock render method is working properly
+  it('should render a template:', function () {
+    render('I am: <%= name %>', {name: 'Jon'}).should.equal('I am: Jon');
+  });
+
+  // this is the test that matters
+  it('should render a template with a helper:', function () {
+    var opts = bindHelpers(template, {name: 'Jon', helpers: helpers._}, false);
+    render('I am: <%= replace(name, "J", "Y") %>', opts).should.equal('I am: Yon');
+  });
+
+  it('should throw an error when `app` does not have a bindHelpers method:', function () {
     (function () {
-      templateBindHelpers();
-    }).should.throw('templateBindHelpers expects valid arguments');
+      bindHelpers({});
+    }).should.throw('template-bind-helpers expects app to have a bindHelpers method');
+  });
+
+  it('should throw an error when `context` does not have a helpers property:', function () {
+    (function () {
+      bindHelpers({bindHelpers: function() {}});
+    }).should.throw('template-bind-helpers expects `context` to have a helpers property.');
+
+    (function () {
+      bindHelpers({bindHelpers: function() {}}, {});
+    }).should.throw('template-bind-helpers expects `context` to have a helpers property.');
   });
 });
