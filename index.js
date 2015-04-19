@@ -34,8 +34,8 @@ module.exports = function bindHelpers(app, context, isAsync) {
     throw new Error('template-bind-helpers expects app to have a bindHelpers method');
   }
 
-  if (!context || !context.hasOwnProperty('helpers')) {
-    throw new Error('template-bind-helpers expects `context` to have a helpers property.');
+  if (typeof context !== 'object') {
+    throw new Error('template-bind-helpers expects a context object.');
   }
 
   app.bindHelpers.call(app, context, app.context, isAsync);

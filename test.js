@@ -54,13 +54,9 @@ describe('bindHelpers', function () {
     }).should.throw('template-bind-helpers expects app to have a bindHelpers method');
   });
 
-  it('should throw an error when `context` does not have a helpers property:', function () {
+  it('should throw an error when `context` is not an object:', function () {
     (function () {
       bindHelpers({bindHelpers: function() {}});
-    }).should.throw('template-bind-helpers expects `context` to have a helpers property.');
-
-    (function () {
-      bindHelpers({bindHelpers: function() {}}, {});
-    }).should.throw('template-bind-helpers expects `context` to have a helpers property.');
+    }).should.throw('template-bind-helpers expects a context object.');
   });
 });
