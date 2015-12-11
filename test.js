@@ -7,56 +7,61 @@
 
 'use strict';
 
-/* deps:mocha */
+require('mocha');
+var assert = require('assert');
 var should = require('should');
 var bindHelpers = require('./');
-var Template = require('template');
+var Templates = require('templates');
 var helpers = require('template-helpers');
 var _ = require('lodash');
-var template;
+var app;
 
-function render(str, context) {
+function render(str, context, cb) {
   try {
     var opts = {imports: context.imports};
-    return _.template(str, opts)(context);
+    cb(null, _.template(str, opts)(context));
   } catch(err) {
-    return err;
+    cb(err);
   }
 }
 
 describe('bindHelpers', function () {
   beforeEach(function () {
-    template = new Template();
-    template.engine('*', require('engine-lodash'));
-    template.helpers(helpers._);
+    app = new Templates();
+    app.engine('*', require('engine-base'));
+    app.option('view engine', '*');
+    app.helpers(helpers._);
+    app.create('pages');
   });
 
   // make sure Template is working directly
-  it('should render a template with a helper:', function () {
-    template.render('I am: <%= name %>', {name: 'Jon'}).should.equal('I am: Jon');
-    template.render('I am: <%= replace(name, "J", "Y") %>', {name: 'Jon'}).should.equal('I am: Yon');
+  it('should render a template with a helper:', function (cb) {
+    app.page('foo', {content: 'I am: <%= name %>'});
+    app.render('foo', {name: 'Jon'}, function(err, res) {
+      if (err) return cb(err);
+      assert.equal(res.content, 'I am: Jon');
+      cb();
+    });
   });
 
-  // make sure our mock render method is working properly
-  it('should render a template:', function () {
-    render('I am: <%= name %>', {name: 'Jon'}).should.equal('I am: Jon');
+  it('should render a template with multiple params:', function (cb) {
+    app.page('bar', {content: 'I am: <%= replace(name, "J", "Y") %>'});
+    app.render('bar', {name: 'Jon'}, function(err, res) {
+      if (err) return cb(err);
+      assert.equal(res.content, 'I am: Yon');
+      cb();
+    });
   });
 
   // this is the test that matters
-  it('should render a template with a helper:', function () {
-    var opts = bindHelpers(template, {name: 'Jon', helpers: helpers._}, false);
-    render('I am: <%= replace(name, "J", "Y") %>', opts).should.equal('I am: Yon');
-  });
+  it('should render a template with a helper:', function(cb) {
+    var view = app.page('baz', {content: 'I am: <%= replace(name, "J", "Y") %>'});
+    var opts = bindHelpers(app, view, {name: 'Jon', helpers: helpers._}, false);
+    render(view.content, opts, function(err, res) {
 
-  it('should throw an error when `app` does not have a bindHelpers method:', function () {
-    (function () {
-      bindHelpers({});
-    }).should.throw('template-bind-helpers expects app to have a bindHelpers method');
-  });
-
-  it('should throw an error when `context` is not an object:', function () {
-    (function () {
-      bindHelpers({bindHelpers: function() {}});
-    }).should.throw('template-bind-helpers expects a context object.');
+      if (err) return cb(err);
+      assert.equal(res, 'I am: Yon');
+      cb();
+    });
   });
 });

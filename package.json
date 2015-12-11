@@ -1,23 +1,14 @@
 {
   "name": "template-bind-helpers",
-  "description": "Utility for applications based on Template for exposing the current instance of the application as `this` in helpers.",
+  "description": "Bind the current instance of a Templates-based application to an object of helpers, allowing them to be passed to a different render method.",
   "version": "0.1.2",
   "homepage": "https://github.com/jonschlinkert/template-bind-helpers",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "https://github.com/jonschlinkert"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jonschlinkert/template-bind-helpers.git"
-  },
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/template-bind-helpers",
   "bugs": {
     "url": "https://github.com/jonschlinkert/template-bind-helpers/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/jonschlinkert/template-bind-helpers/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -28,13 +19,16 @@
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "isobject": "^2.0.0"
+  },
   "devDependencies": {
-    "engine-lodash": "^0.6.2",
-    "lodash": "^3.7.0",
+    "engine-base": "^0.1.2",
+    "lodash": "^3.10.1",
     "mocha": "*",
     "should": "*",
-    "template": "^0.12.6",
-    "template-helpers": "^0.3.2"
+    "template-helpers": "^0.3.4",
+    "templates": "^0.6.3"
   },
   "keywords": [
     "assemble",
@@ -45,5 +39,24 @@
     "template",
     "templates",
     "verb"
-  ]
+  ],
+  "verb": {
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "helper-cache",
+        "engine-cache",
+        "async-helpers",
+        "template-helpers"
+      ]
+    },
+    "reflinks": [
+      "template",
+      "assemble",
+      "verb",
+      "generate"
+    ]
+  }
 }
